@@ -8,6 +8,9 @@ namespace Topic_3_Monogame___Animation
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        Texture2D tribbleGreyTexture;
+        Rectangle greyTribbleRect;
+        Vector2 tribbleGreySpeed;
 
         public Game1()
         {
@@ -21,12 +24,14 @@ namespace Topic_3_Monogame___Animation
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            greyTribbleRect = new Rectangle(300, 10, 100, 100);
+            tribbleGreySpeed = new Vector2(2, 0);
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            tribbleGreyTexture = Content.Load<Texture2D>("tribbleGrey");
             // TODO: use this.Content to load your game content here
         }
 
@@ -38,6 +43,8 @@ namespace Topic_3_Monogame___Animation
             // TODO: Add your update logic here
 
             base.Update(gameTime);
+            greyTribbleRect.X += (int)tribbleGreySpeed.X;
+            greyTribbleRect.Y += (int)tribbleGreySpeed.Y;
         }
 
         protected override void Draw(GameTime gameTime)
@@ -47,6 +54,9 @@ namespace Topic_3_Monogame___Animation
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(tribbleGreyTexture, greyTribbleRect, Color.White);
+            _spriteBatch.End();
         }
     }
 }
